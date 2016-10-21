@@ -90,3 +90,4 @@ kubectl proxy
 ```
 Goto [http://localhost:8001/ui](http://localhost:8001/ui)
 
+https://blog.oestrich.org/2015/08/running-postgres-inside-kubernetes/
