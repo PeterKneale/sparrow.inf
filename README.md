@@ -46,6 +46,8 @@ gcloud docker push gcr.io/simplicate-sparrow/sparrow-api
 List the remote images
 ```
 gcloud beta container images list
+NAME
+gcr.io/simplicate-sparrow/sparrow-api
 ```
 
 ### Create Cluster
@@ -75,7 +77,15 @@ kubectl expose deployment sparrow-api --type="LoadBalancer"
 Get the external IP of the new service (may take a few minutes)
 ```
 kubectl get service sparrow-api
-```
+NAME          CLUSTER-IP     EXTERNAL-IP     PORT(S)   AGE
+sparrow-api   10.3.243.255   104.197.54.72   80/TCP    5m
 ```
 
+### Connect to the containers
+Start up a proxy to connect to the Kubernetes control plane:
+```
+gcloud container clusters get-credentials simplicate-sparrow-dev --zone us-central1-b --project simplicate-sparrow
+kubectl proxy
+```
+Goto [http://localhost:8001/ui](http://localhost:8001/ui)
 
