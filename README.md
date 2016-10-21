@@ -23,7 +23,8 @@ docker-compose up
 Using Google Cloud, Create a cluster and push instances of our container to it.
 
 ### Setup Authentication
-[Reference](https://developers.google.com/identity/protocols/application-default-credentials)
+[Default credentials](https://developers.google.com/identity/protocols/application-default-credentials)
+
 [Create credential via console](https://console.developers.google.com/apis/credentials?project=simplicate-sparrow)
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=/xxx/auth.json
@@ -60,10 +61,21 @@ gcloud container clusters create simplicate-sparrow-dev
 
 ### Run Containers
 [Reference](https://cloud.google.com/container-engine/docs/quickstart)
+
+Run the docker image in a container on the cluster
 ```
 kubectl run sparrow-api --image=gcr.io/simplicate-sparrow/sparrow-api --port=80
+```
+
+Expose a load balancer in front of the api
+```
 kubectl expose deployment sparrow-api --type="LoadBalancer"
+```
+
+Get the external IP of the new service (may take a few minutes)
+```
 kubectl get service sparrow-api
+```
 ```
 
 
