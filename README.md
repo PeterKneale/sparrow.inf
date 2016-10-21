@@ -85,6 +85,7 @@ sparrow-api   10.3.243.255   104.197.54.72   80/TCP    5m
 Start up a proxy to connect to the Kubernetes control plane:
 ```
 gcloud container clusters get-credentials simplicate-sparrow-dev --zone us-central1-b --project simplicate-sparrow
+
 kubectl proxy
 ```
 Goto [http://localhost:8001/ui](http://localhost:8001/ui)
