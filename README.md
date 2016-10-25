@@ -1,14 +1,5 @@
 # sparrow.inf
 
-## Docker
-Build docker images for use locally or in the cloud
-```
-
-docker images
-REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-simplicate/sparrow-api   latest              1c883fc3ffc6        About an hour ago   681.5 MB
-```
-
 ## Local development
 Use docker compose to bring up the local environment.
 ```
@@ -47,7 +38,7 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
     ```
     docker build -t simplicate/sparrow-api .
     ```
-    
+
  - Tag the local image so that it can be pushed to the google container registry.
     ```
     docker tag simplicate/sparrow-api gcr.io/simplicate-sparrow/sparrow-api
