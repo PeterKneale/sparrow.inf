@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sparrow-ingress
+spec:
+  backend:
+    serviceName: sparrow-api
+    servicePort: 80

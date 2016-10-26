@@ -14,7 +14,7 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
 
 ### Setup Authentication
  - Instructions for creating your [default credentials](https://developers.google.com/identity/protocols/application-default-credentials)
-   in your [console](https://console.developers.google.com/apis/credentials?project=simplicate-sparrow)
+   in your [console](https://console.developers.google.com/apis/credentials?project=sparrow)
  - Once you have your authentication file, setup the below environment variable point to it.
    ```
    export GOOGLE_APPLICATION_CREDENTIALS=/xxx/auth.json
@@ -25,7 +25,7 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
     ```
  - Specify the project if necessary
     ```
-    gcloud config set project simplicate-sparrow
+    gcloud config set project sparrow
     ```
  - Specify the region
     ```
@@ -36,17 +36,17 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
  - Read the [reference](https://cloud.google.com/container-registry/docs/pushing)
  - Build the docker image
     ```
-    docker build -t simplicate/sparrow-api .
+    docker build -t sparrow/api .
     ```
 
  - Tag the local image so that it can be pushed to the google container registry.
     ```
-    docker tag simplicate/sparrow-api gcr.io/simplicate-sparrow/sparrow-api
+    docker tag sparrow/api gcr.io/sparrow/api
     ```
 
 - Push the image to the google container registry
     ```
-    gcloud docker -- push gcr.io/simplicate-sparrow/sparrow-api
+    gcloud docker -- push gcr.io/sparrow/api
     ```
 
 - List the remote images
@@ -58,7 +58,7 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
 
  - Create a cluster
     ```
-    gcloud container clusters create simplicate-sparrow-dev
+    gcloud container clusters create sparrow-dev
     ```
 
 ### Run Containers
@@ -69,15 +69,14 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
     kubectl create -f database-pod.yaml
     kubectl create -f database-service.yaml
     ```
-
- - Run the docker image in a container on the cluster
+ - Create the api 
+    ```   
+    kubectl create -f api-pod.yaml
+    kubectl create -f api-service.yaml
     ```
-    kubectl run sparrow-api --image=gcr.io/simplicate-sparrow/sparrow-api --port=80
+- Allow ingress (allow 5 mins)
     ```
-
- - Expose a load balancer in front of the api
-    ```
-    kubectl expose deployment sparrow-api --type="LoadBalancer"
+    kubectl create -f ingress.yaml
     ```
 
  - Get the external IP of the new service (may take a few minutes)
@@ -90,10 +89,18 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
 ### Connect to the containers via the Kubernetes Control Plane Proxy Thing
  - Start up a proxy to connect to the Kubernetes control plane:
     ```
-    gcloud container clusters get-credentials simplicate-sparrow-dev --zone us-central1-b --project simplicate-sparrow
-
+    gcloud container clusters get-credentials sparrow-dev --zone us-central1-b --project sparrow
     kubectl proxy
     ```
  - Goto [http://localhost:8001/ui](http://localhost:8001/ui) and you should be able to see kubernetes
 
 https://blog.oestrich.org/2015/08/running-postgres-inside-kubernetes/
+
+## Teardown
+```
+kubectl delete pod sparrow-db
+kubectl delete service sparrow-db
+kubectl delete pod sparrow-api
+kubectl delete service sparrow-api
+kubectl delete ing sparrow-ingress
+```
