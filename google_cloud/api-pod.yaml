@@ -8,11 +8,11 @@ spec:
       image: gcr.io/simplicate-sparrow/sparrow-api
       livenessProbe:
           httpGet:
-            path: /alive
+            path: /api/users
             port: 80
       readinessProbe: 
           httpGet:
-            path: /alive
+            path: /api/users
             port: 80
       env:
         - name: DB_PORT_6379_TCP_ADDR
