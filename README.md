@@ -12,20 +12,22 @@ docker-compose up
 ## Cloud Deployment
 Using [Google Cloud](https://console.cloud.google.com), create a cluster and push instances of our container to it.
 
+### Setup project
+ - Create your project 'sparrow' (simplicate-sparrow-project)
+
+ - To check your configuration
+ ```
+ gcloud config list
+ ```
+
 ### Setup Authentication
- - Instructions for creating your [default credentials](https://developers.google.com/identity/protocols/application-default-credentials)
-   in your [console](https://console.developers.google.com/apis/credentials?project=sparrow)
- - Once you have your authentication file, setup the below environment variable point to it.
-   ```
-   export GOOGLE_APPLICATION_CREDENTIALS=/xxx/auth.json
-   ```
  - Login to your account from the console which will spawn a browser
-    ```
-    gcloud auth login
-    ```
+   ```
+   gcloud auth application-default login
+   ```
  - Specify the project if necessary
     ```
-    gcloud config set project sparrow
+    gcloud config set project simplicate-sparrow-project
     ```
  - Specify the region
     ```
@@ -37,16 +39,22 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
  - Build the docker image
     ```
     docker build -t sparrow/api .
+    docker build -t sparrow/api:small  -f Dockerfile.small .
+    docker build -t sparrow/api:tiny   -f Dockerfile.tiny .
     ```
 
  - Tag the local image so that it can be pushed to the google container registry.
     ```
-    docker tag sparrow/api gcr.io/sparrow/api
+    docker tag sparrow/api        gcr.io/simplicate-sparrow-project/api
+    docker tag sparrow/api:small  gcr.io/simplicate-sparrow-project/api:small
+    docker tag sparrow/api:tiny   gcr.io/simplicate-sparrow-project/api:tiny
     ```
 
 - Push the image to the google container registry
     ```
-    gcloud docker -- push gcr.io/sparrow/api
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api:small
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api:tiny
     ```
 
 - List the remote images
@@ -94,13 +102,18 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
     ```
  - Goto [http://localhost:8001/ui](http://localhost:8001/ui) and you should be able to see kubernetes
 
-https://blog.oestrich.org/2015/08/running-postgres-inside-kubernetes/
-
 ## Teardown
-```
-kubectl delete pod sparrow-db
-kubectl delete service sparrow-db
-kubectl delete pod sparrow-api
-kubectl delete service sparrow-api
-kubectl delete ing sparrow-ingress
-```
+- Delete the entire project
+    ```
+    gcloud projects delete sparrow
+    ```
+ - or
+    ```
+    kubectl delete pod sparrow-db
+    kubectl delete service sparrow-db
+    kubectl delete pod sparrow-api
+    kubectl delete service sparrow-api
+    kubectl delete ing sparrow-ingress
+    ```
+# References
+ - https://blog.oestrich.org/2015/08/running-postgres-inside-kubernetes/

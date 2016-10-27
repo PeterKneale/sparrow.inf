@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: sparrow-api
-      image: gcr.io/simplicate-sparrow/sparrow-api
+      image: gcr.io/simplicate-sparrow-project/api
       livenessProbe:
           httpGet:
             path: /api/users
@@ -16,7 +16,7 @@ spec:
             port: 80
       env:
         - name: DB_PORT_6379_TCP_ADDR
-          value: 10.0.1.10 
+          value: 10.12.2.3
         - name: DB_PORT_6379_TCP_PORT
           value: "5432"
         - name: DB_DATABASE
