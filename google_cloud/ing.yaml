@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ing
+  labels:
+    component: ing
+spec:
+  rules:
+  - host: webapitester.com
+    http:
+      paths:
+      - path: /api
+        backend:
+          serviceName: api-svc
+          servicePort: 80
+      - path: /
+        backend:
+          serviceName: web-svc
+          servicePort: 80

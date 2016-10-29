@@ -1,10 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: sparrow-db
+  name: db-pod
+  labels:
+    component: db-pod
 spec:
   containers:
-    - name: sparrow-db
+    - name: db-con
       image: postgres
       env:
         - name: POSTGRES_DB
@@ -15,4 +17,4 @@ spec:
           value: password
       ports:
         - containerPort: 5432
-          name: sparrow-db
+          name: db-port
