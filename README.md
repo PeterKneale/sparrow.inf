@@ -1,11 +1,24 @@
 # sparrow.inf
 
-## Cloud Deployment
-Using [Google Cloud](https://console.cloud.google.com), create a cluster and push instances of our container to it.
+## Google Cloud Deployment
+Instructions to host the sparrow projecet using.
 
 ### Setup project
+ - Login to [Google Cloud](https://console.cloud.google.com)
  - Create a project 'sparrow' (id: simplicate-sparrow-project)
+ 
+### Install the google cloud tools
+ - Install [gcloud](https://www.google.com.au/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjXr5P4i4bQAhWCJ5QKHWY5B40QFggbMAA&url=https%3A%2F%2Fcloud.google.com%2Fsdk%2F&usg=AFQjCNGJ6NuXLC5eFVGtotHysFNTyoS5-Q&sig2=ZjUH_yGAyQgv0HHODP_4kQ&bvm=bv.137132246,d.dGo)
+ 
 
+### Create cluster
+
+ - Create a cluster
+ 
+    ```
+    gcloud container clusters create sparrow-dev
+    ```
+    
 ### Setup Authentication
  - Login to your account from the console which will spawn a browser
  
@@ -63,13 +76,6 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
 - List the remote images
     ```
     gcloud beta container images list
-    ```
-
-### Create cluster
-
- - Create a cluster
-    ```
-    gcloud container clusters create sparrow-dev
     ```
 
 ### Create services, pods and ingress 
