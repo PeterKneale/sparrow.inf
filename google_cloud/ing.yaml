@@ -4,7 +4,6 @@ metadata:
   name: ing
   labels:
     component: ing
-    
 spec:
   rules:
   - host: webapitester.com
