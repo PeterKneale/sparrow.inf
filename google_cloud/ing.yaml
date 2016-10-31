@@ -4,16 +4,18 @@ metadata:
   name: ing
   labels:
     component: ing
+    
 spec:
   rules:
   - host: webapitester.com
     http:
       paths:
-      - path: /api
-        backend:
-          serviceName: api-svc
-          servicePort: 80
-      - path: /
-        backend:
+      - backend:
           serviceName: web-svc
+          servicePort: 80
+  - host: api.webapitester.com
+    http:
+      paths:
+      - backend:
+          serviceName: api-svc
           servicePort: 80
