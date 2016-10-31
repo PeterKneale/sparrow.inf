@@ -49,7 +49,7 @@ Instructions to host the sparrow projecet using.
 ### Publish Docker Images to Registry
  - Read the [reference](https://cloud.google.com/container-registry/docs/pushing)
 
- - Build the docker image using the GOLANG base image (~ 600MB)
+ - Build the docker image using the GOLANG base image (~ 600MB, good for diagnostics)
     ```
     go build
     docker build -t sparrow/api .
@@ -65,7 +65,7 @@ Instructions to host the sparrow projecet using.
     gcloud docker -- push gcr.io/simplicate-sparrow-project/api-small
     ```
 
- - Build the docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
+- Build the docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
     ```
     CC=$(which musl-gcc) go build --ldflags '-w -linkmode external -extldflags "-static"'
     docker build -t sparrow/api-tiny -f Dockerfile.tiny .
