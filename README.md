@@ -1,14 +1,5 @@
 # sparrow.inf
 
-## Local development
-Use docker compose to bring up the local environment.
-```
-export DB_DATABASE=sparrow
-export DB_USER=postgres
-export DB_PASSWORD=password
-docker-compose up
-```
-
 ## Cloud Deployment
 Using [Google Cloud](https://console.cloud.google.com), create a cluster and push instances of our container to it.
 
