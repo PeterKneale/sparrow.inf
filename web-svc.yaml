@@ -9,6 +9,5 @@ spec:
   ports:
     - port: 80
       targetPort: web-port
-      protocol: TCP
   selector:
     component: web-pod

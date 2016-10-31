@@ -62,8 +62,8 @@ Using [Google Cloud](https://console.cloud.google.com), create a cluster and pus
  - Build the docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
     ```
     CC=$(which musl-gcc) go build --ldflags '-w -linkmode external -extldflags "-static"'
-    docker tag -f sparrow/api-tiny gcr.io/simplicate-sparrow-project/api-tiny
     docker build -t sparrow/api-tiny -f Dockerfile.tiny .
+    docker tag -f sparrow/api-tiny gcr.io/simplicate-sparrow-project/api-tiny
     gcloud docker -- push gcr.io/simplicate-sparrow-project/api-tiny
     ```
 
