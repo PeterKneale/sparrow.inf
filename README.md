@@ -4,29 +4,31 @@
 Using [Google Cloud](https://console.cloud.google.com), create a cluster and push instances of our container to it.
 
 ### Setup project
- - Create your project 'sparrow' (simplicate-sparrow-project)
-
- - To check your configuration
- ```
- gcloud config list
- ```
+ - Create a project 'sparrow' (id: simplicate-sparrow-project)
 
 ### Setup Authentication
  - Login to your account from the console which will spawn a browser
+ 
    ```
    gcloud auth application-default login
    ```
+   
  - Start up a proxy to connect to the Kubernetes control plane:
+ 
     ```
     kubectl proxy
     ```
+    
  - Goto [http://localhost:8001/ui](http://localhost:8001/ui) and you should be able to see kubernetes
 
  - Change the project if necessary
+ 
     ```
     gcloud config set project simplicate-sparrow-project
     ```
+    
  - Change the region if necessary
+ 
     ```
     gcloud config set compute/zone us-central1-b
     ```
