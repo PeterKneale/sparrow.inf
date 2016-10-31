@@ -1,7 +1,7 @@
 # sparrow.inf
 
 ## Google Cloud Deployment
-Instructions to host the sparrow projecet using.
+Instructions for how to deploy the sparrow project onto google cloud infrastructure using kubernetes.
 
 ### Setup project
  - Login to [Google Cloud](https://console.cloud.google.com)
