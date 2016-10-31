@@ -127,10 +127,12 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 
 ### Delete everything else
 - Delete the entire project
+
     ```
     gcloud projects delete simplicate-sparrow-project
     ```
 - delete local containers and images
+
     ```
     docker rm -f $(docker ps -a -q)
     docker rmi -f $(docker images -q)
