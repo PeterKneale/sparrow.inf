@@ -49,28 +49,20 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 ### Publish Docker Images to Registry
  - Read the [reference](https://cloud.google.com/container-registry/docs/pushing)
 
- - Build the docker image using the GOLANG base image (~ 600MB, good for diagnostics)
+ - Build the `debug` docker image using the GOLANG base image (~ 600MB, good for diagnostics)
     ```
     go build
-    docker build -t sparrow/api .
-    docker tag -f sparrow/api gcr.io/simplicate-sparrow-project/api
-    gcloud docker -- push gcr.io/simplicate-sparrow-project/api
+    docker build -t sparrow/api-debug Dockerfile.debug .
+    docker tag -f sparrow/api-debug gcr.io/simplicate-sparrow-project/api-debug
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-debug
     ```
 
-- Build the docker image using the GOLANG:ALPINE base image (~ 200MB and note it is compiled differently) 
+- Build the `release` docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
     ```
     CC=$(which musl-gcc) go build --ldflags '-w -linkmode external -extldflags "-static"'
-    docker build -t sparrow/api-small -f Dockerfile.small .
-    docker tag -f sparrow/api-small gcr.io/simplicate-sparrow-project/api-small
-    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-small
-    ```
-
-- Build the docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
-    ```
-    CC=$(which musl-gcc) go build --ldflags '-w -linkmode external -extldflags "-static"'
-    docker build -t sparrow/api-tiny -f Dockerfile.tiny .
-    docker tag -f sparrow/api-tiny gcr.io/simplicate-sparrow-project/api-tiny
-    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-tiny
+    docker build -t sparrow/api-release -f Dockerfile.release .
+    docker tag -f sparrow/api-release gcr.io/simplicate-sparrow-project/api-release
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-release
     ```
 
 - List the remote images

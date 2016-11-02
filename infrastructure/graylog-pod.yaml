@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: log-pod
+  labels:
+    component: log-pod
+spec:
+  containers:
+    - name: mongo
+      image: mongo:3
+      ports:
+        - containerPort: 27017
+          name: mongo-port
+    - name: elasticsearch
+      image: elasticsearch:2
+      ports:
+        - containerPort: 9200
+          name: es-port-1
+        - containerPort: 9200
+          name: es-port-2
+    - name: graylog
+      image: graylog2/server:2.1.0-3
+      args: ["-Des.cluster.name","graylog"]
+      ports:
+        - containerPort: 9000
+          name: log-port-ui
+        - containerPort: 12201
+          name: log-port-in1
+          protocol: "UDP"
+        - containerPort: 1514
+          name: log-port-in2
+          protocol: "UDP"
+      env:
+        - name: PASSWORD_SECRET
+          value: password
+        - name: ROOT_PASSWORD_SHA2
+          value: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+        - name: WEB_ENDPOINT_URI
+          value: http://127.0.0.1:9000/api
