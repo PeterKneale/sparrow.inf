@@ -1,4 +1,5 @@
-# sparrow.inf
+# Sparrow
+Sparrow INF
 
 ## Google Cloud Deployment
 Instructions for how to deploy the sparrow project onto google cloud infrastructure using kubernetes.
@@ -44,30 +45,6 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
  
     ```
     gcloud config set compute/zone us-central1-b
-    ```
-
-### Publish Docker Images to Registry
- - Read the [reference](https://cloud.google.com/container-registry/docs/pushing)
-
- - Build the `debug` docker image using the GOLANG base image (~ 600MB, good for diagnostics)
-    ```
-    go build
-    docker build -t sparrow/api-debug Dockerfile.debug .
-    docker tag -f sparrow/api-debug gcr.io/simplicate-sparrow-project/api-debug
-    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-debug
-    ```
-
-- Build the `release` docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
-    ```
-    CC=$(which musl-gcc) go build --ldflags '-w -linkmode external -extldflags "-static"'
-    docker build -t sparrow/api-release -f Dockerfile.release .
-    docker tag -f sparrow/api-release gcr.io/simplicate-sparrow-project/api-release
-    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-release
-    ```
-
-- List the remote images
-    ```
-    gcloud beta container images list
     ```
 
 ### Create services, pods and ingress 
@@ -119,13 +96,6 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 
 ### Delete everything else
 - Delete the entire project
-
-    ```
-    gcloud projects delete simplicate-sparrow-project
-    ```
-- delete local containers and images
-
-    ```
-    docker rm -f $(docker ps -a -q)
-    docker rmi -f $(docker images -q)
-    ```
+```
+gcloud projects delete simplicate-sparrow-project
+```
