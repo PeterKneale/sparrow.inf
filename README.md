@@ -14,24 +14,26 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 
 ### Create cluster
 
- - Create a cluster
- 
-    ```
-    gcloud container clusters create sparrow-dev
-    ```
-    
+- Create a cluster
+```
+gcloud container clusters create sparrow-dev
+```
+
+- Create namespace
+```
+kubectl create namespace sparrow
+```
+
 ### Setup Authentication
- - Login to your account from the console which will spawn a browser
- 
-   ```
-   gcloud auth application-default login
-   ```
-   
- - Start up a proxy to connect to the Kubernetes control plane:
- 
-    ```
-    kubectl proxy
-    ```
+- Login to your account from the console which will spawn a browser
+```
+gcloud auth application-default login
+```
+
+- Start up a proxy to connect to the Kubernetes control plane:
+```
+kubectl proxy
+```
     
  - Goto [http://localhost:8001/ui](http://localhost:8001/ui) and you should be able to see kubernetes
 
@@ -52,13 +54,13 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 
  - Create the database, api, web and ingress 
     ```
-    kubectl create -f db-pod.yaml
+    kubectl create -f db-pod-deploy.yaml
     kubectl create -f db-svc.yaml
     
-    kubectl create -f api-pod.yaml
+    kubectl create -f api-pod-deploy.yaml
     kubectl create -f api-svc.yaml
     
-    kubectl create -f web-pod.yaml
+    kubectl create -f web-pod-deploy.yaml
     kubectl create -f web-svc.yaml
   
     kubectl create -f ing.yaml
@@ -93,6 +95,12 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 
     kubectl delete ing      ing
     ```
+
+### Delete cluster
+- Delete the entire project
+```
+gcloud container clusters delete sparrow-dev
+```
 
 ### Delete everything else
 - Delete the entire project
