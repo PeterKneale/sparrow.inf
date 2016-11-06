@@ -2,6 +2,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: api-pod
+  generateName: api-pod-
+  namespace: sparrow
 spec:
   replicas: 2 
   template:
@@ -22,7 +24,7 @@ spec:
                 port: 80
           env:
             - name: DB_HOST
-              value: db-svc
+              value: db-svc.sparrow
             - name: DB_PORT
               value: "5432"
             - name: DB_DATABASE
