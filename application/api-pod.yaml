@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: api-pod-deploy
+  name: api-pod
 spec:
   replicas: 2 
   template:
@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: api-con
-          image: gcr.io/simplicate-sparrow-project/api-tiny
+          image: gcr.io/simplicate-sparrow-project/api-debug
           livenessProbe:
               httpGet:
                 path: /health/alive

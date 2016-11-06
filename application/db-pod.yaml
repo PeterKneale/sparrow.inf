@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: db-pod-deploy
+  name: db-pod
 spec:
   replicas: 1
   template:

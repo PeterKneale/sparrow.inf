@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: web-pod-deploy
+  name: web-pod
 spec:
   replicas: 2 
   template:
@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: web-con
-          image: nginx
+          image: gcr.io/simplicate-sparrow-project/web-debug
           livenessProbe:
               httpGet:
                 path: /

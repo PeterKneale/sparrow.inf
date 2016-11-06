@@ -32,7 +32,12 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
     ```
     kubectl proxy
     ```
-    
+ - if you get stale ip's / ssl errors then try this:
+
+   ```
+   gcloud container clusters get-credentials
+   ``` 
+   
  - Goto [http://localhost:8001/ui](http://localhost:8001/ui) and you should be able to see kubernetes
 
  - Change the project if necessary
@@ -53,12 +58,11 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
  - Create the database, api, web and ingress 
     ```
     kubectl create -f db-pod.yaml
-    kubectl create -f db-svc.yaml
-    
     kubectl create -f api-pod.yaml
-    kubectl create -f api-svc.yaml
-    
     kubectl create -f web-pod.yaml
+    
+    kubectl create -f db-svc.yaml
+    kubectl create -f api-svc.yaml
     kubectl create -f web-svc.yaml
   
     kubectl create -f ing.yaml
@@ -67,13 +71,12 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 ### View services, pods and ingress 
  - Get the database, api, web and ingress 
     ```
-    kubectl describe pod     db-pod
-    kubectl describe service db-svc
-    
-    kubectl describe service api-svc
-    kubectl describe pod     api-pod
+    kubectl describe deployment db-pod
+    kubectl describe deployment api-pod
+    kubectl describe deployment web-pod
 
-    kubectl describe pod     web-pod
+    kubectl describe service db-svc
+    kubectl describe service api-svc
     kubectl describe service web-service
     
     kubectl describe ing     ing
@@ -82,15 +85,14 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 ### Delete services, pods and ingress 
  - Delete the database, api, web and ingress 
     ```
-    kubectl delete service  web-svc
-    kubectl delete pod      web-pod
+    kubectl delete deployment db-pod
+    kubectl delete deployment api-pod
+    kubectl delete deployment web-pod
 
     kubectl delete service  db-svc
-    kubectl delete pod      db-pod
-
     kubectl delete service  api-svc
-    kubectl delete pod      api-pod
-
+    kubectl delete service  web-svc
+    
     kubectl delete ing      ing
     ```
 
