@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ing
+  namespace: sparrow
   labels:
     component: ing
 spec:
