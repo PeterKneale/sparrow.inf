@@ -53,23 +53,12 @@ gcloud container clusters get-credentials sparrow-dev
 gcloud container clusters create sparrow-dev
 ```
 
-- Create namespace
-```
-kubectl create namespace sparrow
-```
-
 ### Create services, pods and ingress 
-- Read the [quickstart](https://cloud.google.com/container-engine/docs/quickstart)
-
-- Create the database, api, web and ingress 
 ```
-kubectl create -f db-deploy.yaml,api-deploy.yaml,web-deploy.yaml
-kubectl create -f db-svc.yaml,api-svc.yaml,web-svc.yaml
-kubectl create -f ing.yaml
+kubectl apply -f .
 ```
 
 ### View services, pods and ingress 
- - Get the database, api, web and ingress 
 ```
 kubectl describe deployment 
 kubectl describe service 
@@ -77,12 +66,6 @@ kubectl describe ing
 ```
 
 ### Delete services, pods and ingress 
-- Delete by name
-```
-kubectl delete -f db-deploy.yaml,api-deploy.yaml,web-deploy.yaml,db-svc.yaml,api-svc.yaml,web-svc.yaml,ing.yaml
-```
-
-- Delete by type 
 ```
 kubectl delete deployments --all
 kubectl delete pods --all
@@ -90,7 +73,6 @@ kubectl delete services --all
 ```
 
 ### Delete Cluster
-- By Cluster 
 ``` 
 gcloud container clusters delete sparrow-dev 
 ```

@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ing
+  name: ingress
   labels:
-    component: ing
+    component: ingress
 spec:
   rules:
   - host: webapitester.com
