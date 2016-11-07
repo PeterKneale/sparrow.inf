@@ -1,9 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: web-pod
-  generateName: web-pod-
-  namespace: sparrow
+  name: web-deploy-pod
 spec:
   replicas: 2 
   template:
