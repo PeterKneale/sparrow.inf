@@ -20,12 +20,6 @@ metadata:
 spec:
   tls:
   - secretName: tls
-  backend:
-    serviceName: jenkins-ui
-    servicePort: 8080
-spec:
-  tls:
-  - secretName: tls
   rules:
   - host: jenkins.webapitester.com
     http:

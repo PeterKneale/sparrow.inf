@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: log-pod
+  name: graylog-pod
+  namespace: infrastructure
   labels:
-    component: log-pod
+    component: graylog-pod
 spec:
   containers:
     - name: mongo
