@@ -2,6 +2,13 @@
 kind: dns#resourceRecordSet
 name: webapitester.com.
 rrdatas:
+- 35.186.207.164
+ttl: 60
+type: A
+---
+kind: dns#resourceRecordSet
+name: webapitester.com.
+rrdatas:
 - ns-cloud-b1.googledomains.com.
 - ns-cloud-b2.googledomains.com.
 - ns-cloud-b3.googledomains.com.
@@ -17,3 +24,79 @@ rrdatas:
 ttl: 21600
 type: SOA
 ---
+kind: dns#resourceRecordSet
+name: api.webapitester.com.
+rrdatas:
+- 35.186.207.164
+ttl: 60
+type: A
+---
+kind: dns#resourceRecordSet
+name: api-dev.webapitester.com.
+rrdatas:
+- ing-dev.webapitester.com.
+ttl: 60
+type: CNAME
+---
+kind: dns#resourceRecordSet
+name: api-prod.webapitester.com.
+rrdatas:
+- ing-prod.webapitester.com.
+ttl: 60
+type: CNAME
+---
+kind: dns#resourceRecordSet
+name: api-qa.webapitester.com.
+rrdatas:
+- ing-qa.webapitester.com.
+ttl: 60
+type: CNAME
+---
+kind: dns#resourceRecordSet
+name: ing-dev.webapitester.com.
+rrdatas:
+- 130.211.38.229
+ttl: 60
+type: A
+---
+kind: dns#resourceRecordSet
+name: ing-prod.webapitester.com.
+rrdatas:
+- 35.186.207.164
+ttl: 60
+type: A
+---
+kind: dns#resourceRecordSet
+name: ing-qa.webapitester.com.
+rrdatas:
+- 130.211.29.87
+ttl: 60
+type: A
+---
+kind: dns#resourceRecordSet
+name: jenkins.webapitester.com.
+rrdatas:
+- 130.211.34.143
+ttl: 300
+type: A
+---
+kind: dns#resourceRecordSet
+name: web-dev.webapitester.com.
+rrdatas:
+- ing-dev.webapitester.com.
+ttl: 60
+type: CNAME
+---
+kind: dns#resourceRecordSet
+name: web-prod.webapitester.com.
+rrdatas:
+- ing-prod.webapitester.com.
+ttl: 60
+type: CNAME
+---
+kind: dns#resourceRecordSet
+name: web-qa.webapitester.com.
+rrdatas:
+- ing-qa.webapitester.com.
+ttl: 60
+type: CNAME
