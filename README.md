@@ -4,6 +4,7 @@ Sparrow INF
 <!-- TOC -->
 
 - [Sparrow](#sparrow)
+- [Application](#application)
     - [Google Cloud Deployment](#google-cloud-deployment)
         - [Install tools](#install-tools)
         - [Setup project](#setup-project)
@@ -16,6 +17,7 @@ Sparrow INF
         - [Delete Cluster](#delete-cluster)
 
 <!-- /TOC -->
+
 # Application
 
 ## Google Cloud Deployment
