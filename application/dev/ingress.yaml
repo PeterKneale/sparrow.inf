@@ -6,13 +6,13 @@ metadata:
     component: ingress
 spec:
   rules:
-  - host: webapitester.com
+  - host: web-dev.webapitester.com
     http:
       paths:
       - backend:
           serviceName: web-svc
           servicePort: 80
-  - host: api.webapitester.com
+  - host: api-dev.webapitester.com
     http:
       paths:
       - backend:

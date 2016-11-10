@@ -16,6 +16,7 @@ Sparrow INF
         - [Delete Cluster](#delete-cluster)
 
 <!-- /TOC -->
+# Application
 
 ## Google Cloud Deployment
 Instructions for how to deploy the sparrow project onto google cloud infrastructure using kubernetes.
@@ -43,19 +44,27 @@ kubectl proxy
 
 - if you get stale ip's / ssl errors then try this:
 ```
-gcloud container clusters get-credentials sparrow-dev
+gcloud container clusters get-credentials sparrow
 ``` 
 
 ### Create cluster
 
 - Create a cluster
 ```
-gcloud container clusters create sparrow-dev
+gcloud container clusters create sparrow
 ```
 
 ### Create services, pods and ingress 
 ```
-kubectl apply -f .
+kubectl create namespace sparrow-dev
+kubectl create namespace sparrow-qa
+kubectl create namespace sparrow-prod
+kubectl apply -f ./common --namespace sparrow-dev
+kubectl apply -f ./common --namespace sparrow-qa
+kubectl apply -f ./common --namespace sparrow-prod
+kubectl apply -f ./dev --namespace sparrow-dev
+kubectl apply -f ./qa --namespace sparrow-qa
+kubectl apply -f ./prod --namespace sparrow-prod
 ```
 
 ### View services, pods and ingress 
@@ -74,5 +83,5 @@ kubectl delete services --all
 
 ### Delete Cluster
 ``` 
-gcloud container clusters delete sparrow-dev 
+gcloud container clusters delete sparrow 
 ```
