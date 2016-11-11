@@ -30,7 +30,6 @@ kubectl proxy
 ``` 
 - Goto [http://localhost:8001/ui](http://localhost:8001/ui) and you should be able to see kubernetes
 
-
 - if you get stale ip's / ssl errors then try this:
 ```
 gcloud container clusters get-credentials sparrow-cluster
