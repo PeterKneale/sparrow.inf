@@ -9,11 +9,11 @@ Sparrow INF
         - [Install tools](#install-tools)
         - [Setup project](#setup-project)
         - [Setup auth](#setup-auth)
-        - [Setup proxy](#setup-proxy)
         - [Create cluster](#create-cluster)
-        - [Create services, pods and ingress](#create-services-pods-and-ingress)
-        - [View services, pods and ingress](#view-services-pods-and-ingress)
-        - [Delete services, pods and ingress](#delete-services-pods-and-ingress)
+        - [Setup proxy](#setup-proxy)
+        - [Create services,pods and ingress](#create-servicespods-and-ingress)
+        - [View services,pods and ingress](#view-servicespods-and-ingress)
+        - [Delete services,pods and ingress](#delete-servicespods-and-ingress)
         - [Delete Cluster](#delete-cluster)
 
 <!-- /TOC -->
@@ -29,12 +29,19 @@ Instructions for how to deploy the sparrow project onto google cloud infrastruct
 ### Setup project
  - Login to [Google Cloud](https://console.cloud.google.com)
  - Create a project 'sparrow' (id: simplicate-sparrow-project)
- 
+
 ### Setup auth
 - Login to your account from the console which will spawn a browser
 ```
 gcloud auth application-default login
 ```
+
+### Create cluster
+- Create a cluster
+```
+gcloud container clusters create sparrow-cluster --scopes bigquery,cloud-platform,cloud-source-repos,cloud-source-repos-ro,compute-ro,compute-rw,datastore,logging-write,monitoring,monitoring-write,service-control,service-management,\
+ sql,sql-admin,storage-full,storage-ro,storage-rw,taskqueue,useraccounts-ro ,useraccounts-rw,userinfo-email
+``` 
 
 ### Setup proxy
 - Start up a proxy to connect to the Kubernetes control plane:
@@ -46,17 +53,11 @@ kubectl proxy
 
 - if you get stale ip's / ssl errors then try this:
 ```
-gcloud container clusters get-credentials sparrow
+gcloud container clusters get-credentials sparrow-cluster
 ``` 
 
-### Create cluster
 
-- Create a cluster
-```
-gcloud container clusters create sparrow
-```
-
-### Create services, pods and ingress 
+### Create services,pods and ingress 
 ```
 kubectl create namespace sparrow-dev
 kubectl create namespace sparrow-qa
@@ -69,14 +70,14 @@ kubectl apply -f ./qa --namespace sparrow-qa
 kubectl apply -f ./prod --namespace sparrow-prod
 ```
 
-### View services, pods and ingress 
+### View services,pods and ingress 
 ```
 kubectl describe deployment 
 kubectl describe service 
 kubectl describe ing
 ```
 
-### Delete services, pods and ingress 
+### Delete services,pods and ingress 
 ```
 kubectl delete deployments --all
 kubectl delete pods --all
