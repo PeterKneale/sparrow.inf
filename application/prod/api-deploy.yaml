@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: api-con
-          image: gcr.io/simplicate-sparrow-project/api-debug
+          image: gcr.io/simplicate-sparrow-project/api-prod
           livenessProbe:
               httpGet:
                 path: /health/alive

@@ -1,25 +1,6 @@
 # Sparrow
 Sparrow INF
 
-<!-- TOC -->
-
-- [Sparrow](#sparrow)
-- [Application](#application)
-    - [Google Cloud Deployment](#google-cloud-deployment)
-        - [Install tools](#install-tools)
-        - [Setup project](#setup-project)
-        - [Setup auth](#setup-auth)
-        - [Create cluster](#create-cluster)
-        - [Setup proxy](#setup-proxy)
-        - [Create services,pods and ingress](#create-servicespods-and-ingress)
-        - [View services,pods and ingress](#view-servicespods-and-ingress)
-        - [Delete services,pods and ingress](#delete-servicespods-and-ingress)
-        - [Delete Cluster](#delete-cluster)
-
-<!-- /TOC -->
-
-# Application
-
 ## Google Cloud Deployment
 Instructions for how to deploy the sparrow project onto google cloud infrastructure using kubernetes.
 
@@ -39,8 +20,7 @@ gcloud auth application-default login
 ### Create cluster
 - Create a cluster
 ```
-gcloud container clusters create sparrow-cluster --scopes bigquery,cloud-platform,cloud-source-repos,cloud-source-repos-ro,compute-ro,compute-rw,datastore,logging-write,monitoring,monitoring-write,service-control,service-management,\
- sql,sql-admin,storage-full,storage-ro,storage-rw,taskqueue,useraccounts-ro ,useraccounts-rw,userinfo-email
+gcloud container clusters create sparrow-cluster --scopes bigquery,cloud-platform,cloud-source-repos,cloud-source-repos-ro,compute-ro,compute-rw,datastore,logging-write,monitoring,monitoring-write,service-control,service-management,sql,sql-admin,storage-full,storage-ro,storage-rw,taskqueue,useraccounts-ro,useraccounts-rw,userinfo-email
 ``` 
 
 ### Setup proxy
@@ -55,37 +35,3 @@ kubectl proxy
 ```
 gcloud container clusters get-credentials sparrow-cluster
 ``` 
-
-
-### Create services,pods and ingress 
-```
-kubectl create namespace sparrow-dev
-kubectl create namespace sparrow-qa
-kubectl create namespace sparrow-prod
-kubectl apply -f ./common --namespace sparrow-dev
-kubectl apply -f ./common --namespace sparrow-qa
-kubectl apply -f ./common --namespace sparrow-prod
-kubectl apply -f ./dev --namespace sparrow-dev
-kubectl apply -f ./qa --namespace sparrow-qa
-kubectl apply -f ./prod --namespace sparrow-prod
-```
-
-### View services,pods and ingress 
-```
-kubectl describe deployment 
-kubectl describe service 
-kubectl describe ing
-```
-
-### Delete services,pods and ingress 
-```
-kubectl delete deployments --all
-kubectl delete pods --all
-kubectl delete services --all
-kubectl delete ingress --all
-```
-
-### Delete Cluster
-``` 
-gcloud container clusters delete sparrow 
-```

@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: web-con
-          image: gcr.io/simplicate-sparrow-project/web-debug
+          image: gcr.io/simplicate-sparrow-project/web-dev
           livenessProbe:
               httpGet:
                 path: /
