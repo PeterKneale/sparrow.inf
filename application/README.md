@@ -24,16 +24,13 @@ kubectl describe ing
 
 ### Delete services,pods and ingress 
 ```
-kubectl delete deployments --all --namespace sparrow-qa
-kubectl delete pods        --all --namespace sparrow-qa
-kubectl delete services    --all --namespace sparrow-qa
+kubectl delete deployments --all --namespace sparrow-dev
+kubectl delete pods        --all --namespace sparrow-dev
+kubectl delete services    --all --namespace sparrow-dev
+BEST NOT TO DELETE INGRESS BECAUSE IPS CHANGE
+# kubectl delete ingress     --all --namespace sparrow-dev 
 ```
 
-### Delete ingress
-Best not to becuase the IP addresses change and DNS has to be updated.
-```
-kubectl delete ingress --all --namespace sparrow-dev
-```
 
 ### Delete Cluster
 ``` 
